@@ -15,13 +15,17 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return raiz;
     }// fim funcao inserir
 
-    public Node<T> add(T dado) {
+    public void add(T dado) {
         Node<T> node = new Node(dado);
         this.raiz = add(raiz, node);
     }
 
-    private void preOrder(Node<T> raiz){
-        System.out.println(raiz.dado+" - ");
+    private void preOrder(Node<T> raiz) {
+        if (raiz == null) {
+            return;
+        }
+
+        System.out.print(raiz.dado + " ");
         preOrder(raiz.esquerda);
         preOrder(raiz.direita);
     }
