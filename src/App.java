@@ -1,8 +1,7 @@
 import java.util.*;
 
     public class App {
-            static int menu(){
-            Scanner leia = new Scanner(System.in);
+            static int menu(Scanner leia){
             System.out.println("Arvore Binária de Busca");
             System.out.println("1. Inserir elemento");
             System.out.println("2. Remover elemento");
@@ -10,23 +9,29 @@ import java.util.*;
             System.out.println("4. Exibir árvore");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
-            return leia.nextInt();
+            int opcao = leia.nextInt();
+            leia.nextLine();
+            return opcao;
         }
 
     public static void main(String[] args) throws Exception {
         
     Scanner leia = new Scanner(System.in);
-            BinarySearchTree<Integer> arvore = new BinarySearchTree<>(); // Instanciar a arvore
+            BinarySearchTree<Aluno> arvore = new BinarySearchTree<>(); // Instanciar a arvore
             int opcao=0;
             do {
                 System.out.println("----------------------------------");
-                opcao = menu();
+                opcao = menu(leia);
                 switch (opcao) {
                     case 1:
-                        System.out.print("Digite o elemento a ser inserido: ");
-                        int elementoInserir = leia.nextInt();
-                        arvore.add(elementoInserir); // inserir
-                        System.out.println("Elemento inserido com sucesso!");
+                        System.out.print("Digite o nome do aluno: ");
+                        String nome = leia.nextLine();
+                        System.out.print("Digite a Matricula do aluno: ");
+                        int matricula = leia.nextInt();
+                        leia.nextLine();
+                        Aluno aluno = new Aluno(nome, matricula);
+                        arvore.add(aluno); // inserir
+                        System.out.println("Aluno cadastrado com sucesso!");
                         break;
                     case 2:
                         System.out.print("Digite o elemento a ser removido: ");
@@ -35,13 +40,16 @@ import java.util.*;
                         System.out.println("Elemento removido com sucesso!");
                         break;
                     case 3:
-                        System.out.print("Digite o elemento a ser buscado: ");
-                        int elementoBuscar = leia.nextInt();
-                        Integer resultado = arvore.buscar(elementoBuscar);
+                        System.out.print("Digite a matricula do aluno: ");
+                        int alunoBusca = leia.nextInt();
+
+                        Aluno chaveBusca = new Aluno("Nome",alunoBusca);
+
+                        Aluno resultado = arvore.buscar(chaveBusca);
                         if (resultado != null) {
-                            System.out.println("Elemento " + resultado + " encontrado!");
+                            System.out.println("Aluno " + resultado + " encontrado!");
                         } else {
-                            System.out.println("Elemento não encontrado na árvore!");
+                            System.out.println("Aluno não encontrado!");
                         }
                         break;
 
